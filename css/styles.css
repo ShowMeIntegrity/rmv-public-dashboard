@@ -10,28 +10,82 @@ body {
 }
 
 #banner {
-  margin-bottom: 12px;
+  margin-bottom: 24px;
 }
 
 .banner {
   display: flex;
-  gap: 24px;
+  gap: 12px;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
-.banner-item {
-  padding: 10px 14px;
-  border-radius: 8px;
+.banner-card {
+  flex: 1;
+  min-width: 260px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: #f7f7f7;
 }
 
-.label {
-  display: block;
-  font-size: 48px;
-  font-weight: bold;
+.banner-title {
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.banner-main {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.big-number {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.goal-number {
+  font-size: 24px;
+  color: #777;
+}
+
+.divider {
+  font-size: 24px;
+  color: #aaa;
+}
+
+.banner-sub {
+  margin-top: 6px;
+  font-size: 18px;
+  color: #444;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 24px;
 }
 
 .value {
-  font-size: 48px;
-  font-weight: bold;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.primary {
+  background: #eef4ff;
+}
+
+.secondary {
+  background: #f4f4f4;
+}
+
+.volunteer {
+  color: #2e7d32;
+}
+
+.paid {
+  color: #c62828;
 }

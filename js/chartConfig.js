@@ -13,7 +13,7 @@ export function buildChartOption(data) {
   const goalValid   = minValid.slice(0,8);
 
   const diffValid   = subtractVector(goalValid, realValid);
-  const diffCollect = subtractVector(goalCollect, realCollect);
+  //const diffCollect = subtractVector(goalCollect, realCollect);
 
 
   return {
@@ -89,14 +89,14 @@ export function buildChartOption(data) {
         type:  'bar',
         stack: 'valid',
         data:  realValid,
-        color: "#f9193a"
+        color: "#040449"
       },
       {
-        name: 'Minimum Valid Sigs Needed',
+        name: 'Minimum Valid Sigs Remaining',
         type: 'bar',
         stack: 'valid',
         data: diffValid,
-        color: "#f5a8b0"
+        color: "#a2bad2"
       },
     ]
   };
