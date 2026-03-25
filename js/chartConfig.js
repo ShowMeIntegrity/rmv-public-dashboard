@@ -1,10 +1,8 @@
 export function buildChartOption(data) {
   // Map your sheet columns → chart data
   const division    = data.map(d => d["Division"]);
-  const rawSigs     = data.map(d => d["Raw Sigs"]);
   const checkedSigs = data.map(d => d["Checked Sigs"]);
   const t1Valid     = data.map(d => d["T1-Validated"]);
-  const t1t2Curable = data.map(d => d["T1+T2-Curable"]);
   const collectGoal = data.map(d => d["Collection Goal"]);
   const minValid    = data.map(d => d["Min Valid Needed"]);
 
@@ -21,7 +19,6 @@ export function buildChartOption(data) {
   return {
     tooltip: {
       trigger: 'axis',
-      formatter: "{b0}: {c0}<br />{b1}: {c1}"
     },
 
     legend: {
@@ -70,29 +67,29 @@ export function buildChartOption(data) {
     },
 
     series: [
-      // Actual Numbers
-      {
-        name:  'Collected Sigs',
-        type:  'bar',
-        stack: 'collected',
-        data:  realCollect,
-        color: "#040449"
-      },
+      // Collected Numbers
+    //   {
+    //     name:  'Collected Sigs',
+    //     type:  'bar',
+    //     stack: 'collected',
+    //     data:  realCollect,
+    //     color: "#040449"
+    //   },
+    //   {
+    //     name: 'Sig Collection Goal',
+    //     type: 'bar',
+    //     stack: 'collected',
+    //     data: diffCollect,
+    //     color: "#a2bad2"
+    //   },
+
+      // Valid Numbers
       {
         name:  'Valid Sigs',
         type:  'bar',
         stack: 'valid',
         data:  realValid,
         color: "#f9193a"
-      },
-
-      // Goal Numbers
-      {
-        name: 'Sig Collection Goal',
-        type: 'bar',
-        stack: 'collected',
-        data: diffCollect,
-        color: "#a2bad2"
       },
       {
         name: 'Minimum Valid Sigs Needed',
