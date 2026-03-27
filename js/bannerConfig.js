@@ -3,11 +3,15 @@ export function buildBanner(data) {
     return "<div>No data available</div>";
   }
 
-  const raw = data.map(d => d["Raw Sigs"]);
+  const rmv  = data.rmv;
+  const fw   = data.fw.data;
+  const raw  = rmv.map(d => d["Raw Sigs"]);
+  const paid = fw.map(d => d.signature_count);
+
   const goalNum    = 300000;
   const totalNum   = raw.at(-3);
   const volNum     = raw.at(-2);
-  const paidNum    = raw.at(-1);
+  const paidNum    = paid.reduce((sum, val) => sum + val, 0);
   const percentNum = totalNum/goalNum * 100;
 
   const goalStr    = goalNum.toLocaleString();
@@ -42,7 +46,7 @@ export function buildBanner(data) {
         </div>
 
         <div class="breakdown-row">
-          <span>Paid Collectors</span>
+          <span>Paid</span>
           <span class="value paid">${paidStr}</span>
         </div>
       </div>

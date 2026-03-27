@@ -4,8 +4,48 @@ body {
   color: #212126;
 }
 
+#disclaimer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.chart-disclaimer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #636367;
+  text-align: left;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.disclaimer-title {
+  justify-items: left;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.tight-wrap {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+ol {
+  padding-inline-start: 18px;
+}
+
+.chart-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
 #chart {
   width: 100%;
+  min-width: 600px;
   height: 500px;
 }
 
@@ -83,9 +123,9 @@ body {
 }
 
 .volunteer {
-  color: #2e7d32;
+  color: #212126;
 }
 
 .paid {
-  color: #c62828;
+  color: #636367;
 }
