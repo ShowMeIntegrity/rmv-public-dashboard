@@ -8,13 +8,15 @@ export function buildBanner(data) {
   const raw  = rmv.map(d => d["Raw Sigs"]);
   const paid = fw.map(d => d.signature_count);
 
-  const goalNum    = 300000;
-  const totalNum   = raw.at(-3);
+  const allGoalNum = 300000;
+  const volGoalNum = 220000;
   const volNum     = raw.at(-2);
   const paidNum    = paid.reduce((sum, val) => sum + val, 0);
-  const percentNum = totalNum/goalNum * 100;
+  const totalNum   = volNum + paidNum;
+  const percentNum = totalNum/allGoalNum * 100;
 
-  const goalStr    = goalNum.toLocaleString();
+  const allGoalStr = allGoalNum.toLocaleString();
+  const volGoalStr = volGoalNum.toLocaleString();
   const totalStr   = totalNum.toLocaleString();
   const volStr     = volNum.toLocaleString();
   const paidStr    = paidNum.toLocaleString();
@@ -29,7 +31,7 @@ export function buildBanner(data) {
         <div class="banner-main">
           <span class="big-number">${totalStr}</span>
           <span class="divider">/</span>
-          <span class="goal-number">${goalStr}</span>
+          <span class="goal-number">${allGoalStr}</span>
         </div>
 
         <div class="banner-sub">
@@ -42,7 +44,11 @@ export function buildBanner(data) {
 
         <div class="breakdown-row">
           <span>Volunteers</span>
-          <span class="value volunteer">${volStr}</span>
+          <span class="value volunteer">
+            <span class="current">${volStr}</span>
+            <span class="divider">/<span>
+            <span class="goal">${volGoalStr} goal</span>
+          </span>
         </div>
 
         <div class="breakdown-row">

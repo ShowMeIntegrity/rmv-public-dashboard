@@ -8,6 +8,7 @@
 <body>
   <div id="banner"></div>
   <div class="chart-wrapper">
+    <div id="chart-skeleton"></div>
     <div id="chart"></div>
   </div>
   <div id="disclaimer" class="chart-disclaimer">
@@ -16,6 +17,7 @@
         Notes:
       </div>
       <ol type="i">
+        <li>The campaign is currently prioritizing CDs 1, 2, 3, 4, 5, and 7.</li>
         <li>Chart values update every 5 minutes.</li>
         <li>There is a latency between when signatures are collected and when they are validated.</li>
         <li>Not all collected signatures are valid, so there is a difference between the total collected signatures and total valid signatures.</li>
@@ -23,7 +25,7 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js" defer></script>
   <script type="module" src="js/main.js"></script>
 </body>
 </html>

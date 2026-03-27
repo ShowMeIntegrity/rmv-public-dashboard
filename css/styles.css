@@ -49,6 +49,23 @@ ol {
   height: 500px;
 }
 
+#chart-skeleton {
+  height: 400px;
+  background: linear-gradient(
+    90deg,
+    #f0f0f0 25%,
+    #e0e0e0 37%,
+    #f0f0f0 63%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.4s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
 #banner {
   margin-bottom: 24px;
 }
@@ -112,6 +129,23 @@ ol {
 .value {
   font-size: 24px;
   font-weight: 600;
+}
+
+.value .current {
+  font-weight: 700;
+}
+
+.value .divider {
+  margin: 0 4px;
+  font-weight: 100;
+  font-size: 18px;
+  color: #aaa;
+}
+
+.value .goal {
+  color: #777;
+  font-weight: 100;
+  font-size: 18px;
 }
 
 .primary {
