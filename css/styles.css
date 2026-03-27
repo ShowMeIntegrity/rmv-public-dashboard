@@ -1,0 +1,131 @@
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #212126;
+}
+
+#disclaimer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.chart-disclaimer {
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #636367;
+  text-align: left;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.disclaimer-title {
+  justify-items: left;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.tight-wrap {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+ol {
+  padding-inline-start: 18px;
+}
+
+.chart-wrapper {
+  width: 100%;
+  overflow-x: auto;
+}
+
+#chart {
+  width: 100%;
+  min-width: 600px;
+  height: 500px;
+}
+
+#banner {
+  margin-bottom: 24px;
+}
+
+.banner {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.banner-card {
+  flex: 1;
+  min-width: 260px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: #f7f7f7;
+}
+
+.banner-title {
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.banner-main {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.big-number {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.goal-number {
+  font-size: 24px;
+  color: #777;
+}
+
+.divider {
+  font-size: 24px;
+  color: #aaa;
+}
+
+.banner-sub {
+  margin-top: 6px;
+  font-size: 18px;
+  color: #444;
+}
+
+.breakdown-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+.value {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.primary {
+  background: #eef4ff;
+}
+
+.secondary {
+  background: #f4f4f4;
+}
+
+.volunteer {
+  color: #212126;
+}
+
+.paid {
+  color: #636367;
+}
