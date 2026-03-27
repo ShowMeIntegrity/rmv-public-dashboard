@@ -26,12 +26,8 @@ export function buildChartOption(data) {
         params.forEach(p => {
           total += p.value;
         });
-        console.log(params);
-        console.log(total);
 
         const pct = total ? ((params[0].value / total) * 100).toFixed(1) : 0;
-
-        console.log(pct);
 
         let html = `<strong>${params[0].axisValue} (${pct}%)</strong><br/>`;
         

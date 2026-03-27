@@ -3,8 +3,13 @@ import { buildChartOption } from './chartConfig.js';
 import { buildBanner } from './bannerConfig.js';
 
 const RMV_API_URL = "https://script.google.com/macros/s/AKfycbzyIr-P_cHNEWVtHNdA4W80FeKvGdJt_Yx_bQMUi615nsOZR-sKfvw-qE3Px07Z1Ygn/exec";
+let chart;
 
-const chart = echarts.init(document.getElementById("chart"));
+window.addEventListener('DOMContentLoaded', () => {
+  chart = echarts.init(document.getElementById("chart"));
+  document.getElementById("chart-skeleton").style.display = "none";
+});
+
 const banner = document.getElementById("banner");
 
 async function render() {
