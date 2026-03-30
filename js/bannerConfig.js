@@ -1,4 +1,4 @@
-export function buildBanner(data) {
+window.buildBanner = function (data) {
   if (!data || data.length === 0) {
     return "<div>No data available</div>";
   }

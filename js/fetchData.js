@@ -1,9 +1,6 @@
-export async function fetchData(url) {
-    const res = await fetch(url);
+window.fetchData = async function () {
+  const res  = await fetch("https://rmv-publish-dashboard.vercel.app/");
+  const json = await res.json();
 
-    if (!res.ok) {
-        throw new Error(`API error: ${res.status}`);
-    }
-
-    return await res.json();
-}
+  return json.data;
+};

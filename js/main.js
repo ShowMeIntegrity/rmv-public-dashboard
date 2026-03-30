@@ -1,39 +1,59 @@
-import { fetchData } from './fetchData.js';
-import { buildChartOption } from './chartConfig.js';
-import { buildBanner } from './bannerConfig.js';
-
-const RMV_API_URL = "https://script.google.com/macros/s/AKfycbzyIr-P_cHNEWVtHNdA4W80FeKvGdJt_Yx_bQMUi615nsOZR-sKfvw-qE3Px07Z1Ygn/exec";
 let chart;
+isRendering = false;
 
 window.addEventListener('DOMContentLoaded', () => {
-  chart = echarts.init(document.getElementById("chart"));
-  document.getElementById("chart-skeleton").style.display = "none";
-});
+  const chartEl    = document.getElementById("chart");
+  const skeletonEl = document.getElementById("chart-skeleton");
+  const bannerEl   = document.getElementById("banner");
+  
+  // Check for critical HTML elements
+  if (!chartEl || !bannerEl) {
+    console.error("Missing required DOM elements");
+    return;
+  }
 
-const banner = document.getElementById("banner");
+  chart = echarts.init(chartEl);
+  if (skeletonEl) skeletonEl.style.display = "none";
 
-async function render() {
-    try {
-    const sheetData = await fetchData(RMV_API_URL);
+  // Initial render
+  render();
 
-    // Render Banner
-    banner.innerHTML = buildBanner(sheetData);
-
-    // Render Charts
-    const option = buildChartOption(sheetData);
-    chart.setOption(option);
-
-    window.addEventListener('resize', () => {
+  // Initialize resize handler
+  window.addEventListener('resize', () => {
       chart.resize();
     });
 
+    // Set auto-refresh for every 5 minutes
+    setInterval(render, 5 * 60 * 1000);
+});
+
+async function render() {
+  if (isRendering || !chart) return;
+  isRendering = true;
+
+  try {
+    const sheetData = await fetchData();
+    const banner = document.getElementById("banner");
+
+    if (!sheetData) throw new Error("No data returned");
+
+    // Render Banner
+    if (banner) {
+      banner.innerHTML = buildBanner(sheetData);
+    }
+
+    // Render Charts
+    const option = buildChartOption(sheetData);
+    chart.setOption(option);    
+
   } catch (err) {
     console.error("Error loading chart:", err);
-    banner.innerHTML= "Error loading information";
+
+    const banner = document.getElementById("banner");
+    if (bannerEl) {
+      banner.innerHTML= "Error loading information";
+    }
+  } finally {
+    isRendering = false;
   }
 }
-
-render();
-
-// Auto-refresh render every 30 seconds
-setInterval(render, 300000);

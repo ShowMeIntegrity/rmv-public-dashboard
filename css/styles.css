@@ -45,8 +45,8 @@ ol {
 
 #chart {
   width: 100%;
-  min-width: 600px;
-  height: 500px;
+  height: 60vw;
+  min-height: 320px;
 }
 
 #chart-skeleton {
