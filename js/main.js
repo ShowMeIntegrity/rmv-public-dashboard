@@ -38,12 +38,14 @@ async function render() {
     if (!sheetData) throw new Error("No data returned");
 
     // Render Banner
+    const isMobile = window.innerWidth < 800;
+    console.log(isMobile);
     if (banner) {
-      banner.innerHTML = buildBanner(sheetData);
+      banner.innerHTML = buildBanner(sheetData, isMobile);
     }
 
     // Render Charts
-    const option = buildChartOption(sheetData);
+    const option = buildChartOption(sheetData, isMobile);
     chart.setOption(option);
     
     setTimeout(() => {

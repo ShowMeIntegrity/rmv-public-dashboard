@@ -1,7 +1,9 @@
-window.buildBanner = function (data) {
+window.buildBanner = function (data, isMobile) {
   if (!data || data.length === 0) {
     return "<div>No data available</div>";
   }
+
+  volTitle = isMobile ? "Vols" : "Volunteers"
 
   const rmv  = data.rmv;
   const fw   = data.fw.data;
@@ -43,7 +45,7 @@ window.buildBanner = function (data) {
         <div class="banner-title">Collection Breakdown</div>
 
         <div class="breakdown-row">
-          <span>Volunteers</span>
+          <span>${volTitle}</span>
           <span class="value volunteer">
             <span class="current">${volStr}</span>
             <span class="divider">/<span>

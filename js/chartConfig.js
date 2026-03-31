@@ -1,5 +1,40 @@
-window.buildChartOption = function (data) {
-  // Map your sheet columns → chart data
+window.buildChartOption = function (data, isMobile) {
+  // Set font sizes & text based on platform
+  const staticOptions = {
+    chartType:           "bar",
+    mainTextColor:       "#212126",
+    subTextColor:        "#636367",
+    xAxisLabel:          "Congressional District",
+    stackName:           "valid",
+    series1Name:         "Valid Sigs",
+    series1BarColorMain: "#040449",
+    series1BarColorSub:  "#535f8e",
+    series2BarColorMain: "#a2bad2",
+    series2BarColorSub:  "#dde5ef",
+  }
+  const dynamicOptions = isMobile
+    ? {
+      fontSize:    12,
+      title:       "Valid Sigs by CD",
+      subtitle:    "We need to qualify in 6 of 8 CDs",
+      xAxisRotate: 45,
+      yAxisLabel:  "Sig Count",
+      series2Name: "Valid Sigs Left",
+    }
+    : {
+      fontSize:    18,
+      title:       "Valid Signatures by Congressional District",
+      subtitle:    "We need to qualify in 6 out of 8 congressional districts",
+      xAxisRotate: 0,
+      yAxisLabel:  "Number of Signatures",
+      series2Name: "Valid Sigs Remaining"
+    };
+
+  const options = { ...staticOptions, ...dynamicOptions };
+  
+
+  
+  // Map sheet columns to chart data
   const rmv = data.rmv;
   const division    = rmv.map(d => d["Division"]);
   // const checkedSigs = rmv.map(d => d["Checked Sigs"]);
@@ -19,7 +54,7 @@ window.buildChartOption = function (data) {
 
   return {
     tooltip: {
-      trigger: 'axis',
+      trigger: "axis",
       formatter: function (params) {
         let total = 0;
 
@@ -44,25 +79,24 @@ window.buildChartOption = function (data) {
     },
 
     title: {
-      subtext: "We need to qualify in 6 out of 8 congressional districts.",
+      subtext: options.subtitle,
       subtextStyle: {
-        color: "#636367",
-        fontSize: 24
+        color: options.subTextColor,
+        fontSize: options.fontSize * 4 / 3
       },
-      text: "Valid Signatures by Congressional District",
+      text: options.title,
       textStyle: {
-        color: "#212126",
-        fontSize: 36
+        color: options.mainTextColor,
+        fontSize: options.fontSize * 2
       }
-      
     },
 
     legend: {
       bottom: "2%",
-      itemGap: 48,
+      itemGap: options.fontSize * 8 / 3,
       padding: [24, 6, 0, 6],
       textStyle: {
-        fontSize: 18,
+        fontSize: options.fontSize,
         fontWeight: "bold"
       }
     },
@@ -74,14 +108,15 @@ window.buildChartOption = function (data) {
 
     xAxis: {
       axisLabel: {
-        fontSize: 18,
-        fontWeight: "bold"
+        fontSize: options.fontSize,
+        fontWeight: "bold",
+        rotate: options.xAxisRotate
       },
       data: cds,
-      name: "Congressional District",
+      name: options.xAxisLabel,
       nameLocation: "center",
       nameTextStyle: {
-        fontSize: 24,
+        fontSize: options.fontSize * 4 / 3,
         fontWeight: "bolder",
         padding: 12
       },
@@ -90,69 +125,51 @@ window.buildChartOption = function (data) {
 
     yAxis: {
       axisLabel: {
-        fontSize: 18,
+        fontSize: options.fontSize,
         fontWeight: "bold"
       },
-      name: "Number of Signatures",
+      name: options.yAxisLabel,
       nameLocation: "center",
       nameTextStyle: {
-        fontSize: 24,
+        fontSize: options.fontSize * 4 / 3,
         fontWeight: "bolder",
         padding: 12
       },
       type: "value"
     },
 
-    series: [
-      // Collected Numbers
-    //   {
-    //     name:  'Collected Sigs',
-    //     type:  'bar',
-    //     stack: 'collected',
-    //     data:  realCollect,
-    //     color: "#040449"
-    //   },
-    //   {
-    //     name: 'Sig Collection Goal',
-    //     type: 'bar',
-    //     stack: 'collected',
-    //     data: diffCollect,
-    //     color: "#a2bad2"
-    //   },
-
+    series: [{
       // Valid Numbers
-      {
-        name:  'Valid Sigs',
-        type:  'bar',
-        stack: 'valid',
-        data:  realValid,
-        color: "#040449",
-        itemStyle: {
-          color: function (params) {
-            if (params.dataIndex === 5 | params.dataIndex === 7) {
-              return "#535F8E";
-            }
-            return "#040449";
+      name:  options.series1Name,
+      type:  options.chartType,
+      stack: options.stackName,
+      data:  realValid,
+      color: options.series1BarColorMain,
+      itemStyle: {
+        color: function (params) {
+          if (params.dataIndex === 5 | params.dataIndex === 7) {
+            return options.series1BarColorSub;
           }
+          return options.series1BarColorMain;
         }
-      },
-
-      {
-        name: 'Minimum Valid Sigs Remaining',
-        type: 'bar',
-        stack: 'valid',
-        data: diffValid,
-        color: "#a2bad2",
-        itemStyle: {
-          color: function (params) {
-            if (params.dataIndex === 5 | params.dataIndex === 7) {
-              return "#DDE5EF";
-            }
-            return "#a2bad2";
+      }
+    },
+    {
+      // Remaining Numbers
+      name: options.series2Name,
+      type: options.chartType,
+      stack: options.stackName,
+      data: diffValid,
+      color: options.series2BarColorMain,
+      itemStyle: {
+        color: function (params) {
+          if (params.dataIndex === 5 | params.dataIndex === 7) {
+            return options.series2BarColorSub;
           }
+          return options.series2BarColorMain;
         }
-      },
-    ]
+      }
+    }]
   };
 }
 
