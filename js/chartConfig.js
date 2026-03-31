@@ -17,7 +17,7 @@ window.buildChartOption = function (data, isMobile) {
       fontSize:    12,
       title:       "Valid Sigs by CD",
       subtitle:    "We need to qualify in 6 of 8 CDs",
-      xAxisRotate: 0,
+      xAxisRotate: 45,
       yAxisLabel:  "Sig Count",
       series2Name: "Valid Sigs Left",
     }
@@ -25,7 +25,7 @@ window.buildChartOption = function (data, isMobile) {
       fontSize:    18,
       title:       "Valid Signatures by Congressional District",
       subtitle:    "We need to qualify in 6 out of 8 congressional districts",
-      xAxisRotate: 45,
+      xAxisRotate: 0,
       yAxisLabel:  "Number of Signatures",
       series2Name: "Valid Sigs Remaining"
     };
