@@ -50,7 +50,7 @@ async function render() {
     console.error("Error loading chart:", err);
 
     const banner = document.getElementById("banner");
-    if (bannerEl) {
+    if (banner) {
       banner.innerHTML= "Error loading information";
     }
   } finally {
