@@ -1,5 +1,8 @@
-window.buildChartOption = function (data) {
-  // Map your sheet columns → chart data
+window.buildChartOption = function (data, isMobile) {
+  // Set font sizes based on platform
+  const dynFontSize = isMobile ? 12 : 18;
+  
+  // Map sheet columns to chart data
   const rmv = data.rmv;
   const division    = rmv.map(d => d["Division"]);
   // const checkedSigs = rmv.map(d => d["Checked Sigs"]);
@@ -47,22 +50,22 @@ window.buildChartOption = function (data) {
       subtext: "We need to qualify in 6 out of 8 congressional districts.",
       subtextStyle: {
         color: "#636367",
-        fontSize: 24
+        fontSize: dynFontSize * 4 / 3
       },
       text: "Valid Signatures by Congressional District",
       textStyle: {
         color: "#212126",
-        fontSize: 36
+        fontSize: dynFontSize * 2
       }
       
     },
 
     legend: {
       bottom: "2%",
-      itemGap: 48,
+      itemGap: dynFontSize * 8 / 3,
       padding: [24, 6, 0, 6],
       textStyle: {
-        fontSize: 18,
+        fontSize: dynFontSize,
         fontWeight: "bold"
       }
     },
@@ -74,14 +77,14 @@ window.buildChartOption = function (data) {
 
     xAxis: {
       axisLabel: {
-        fontSize: 18,
+        fontSize: dynFontSize,
         fontWeight: "bold"
       },
       data: cds,
       name: "Congressional District",
       nameLocation: "center",
       nameTextStyle: {
-        fontSize: 24,
+        fontSize: dynFontSize * 4 / 3,
         fontWeight: "bolder",
         padding: 12
       },
@@ -90,13 +93,13 @@ window.buildChartOption = function (data) {
 
     yAxis: {
       axisLabel: {
-        fontSize: 18,
+        fontSize: dynFontSize,
         fontWeight: "bold"
       },
       name: "Number of Signatures",
       nameLocation: "center",
       nameTextStyle: {
-        fontSize: 24,
+        fontSize: dynFontSize * 4 / 3,
         fontWeight: "bolder",
         padding: 12
       },

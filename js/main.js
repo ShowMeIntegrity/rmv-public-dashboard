@@ -38,8 +38,10 @@ async function render() {
     if (!sheetData) throw new Error("No data returned");
 
     // Render Banner
+    const isMobile = window.innerWidth < 768;
+    console.log(isMobile);
     if (banner) {
-      banner.innerHTML = buildBanner(sheetData);
+      banner.innerHTML = buildBanner(sheetData, isMobile);
     }
 
     // Render Charts
