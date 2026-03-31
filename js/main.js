@@ -44,7 +44,11 @@ async function render() {
 
     // Render Charts
     const option = buildChartOption(sheetData);
-    chart.setOption(option);    
+    chart.setOption(option);
+    
+    setTimeout(() => {
+      if (chart) chart.resize();
+    }, 100);
 
   } catch (err) {
     console.error("Error loading chart:", err);
