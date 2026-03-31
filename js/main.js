@@ -45,7 +45,7 @@ async function render() {
     }
 
     // Render Charts
-    const option = buildChartOption(sheetData);
+    const option = buildChartOption(sheetData, isMobile);
     chart.setOption(option);
     
     setTimeout(() => {
