@@ -1,18 +1,14 @@
 window.buildChartOption = function (data, isMobile) {
   // Set font sizes & text based on platform
   const staticOptions = {
-    chartType:     "bar",
-    mainTextColor: "#212126",
-    subTextColor:  "#636367",
-
-    xAxisLabel: "Congressional District",
-    
-    stackName: "valid",
-    
-    series1Name: "Valid Sigs",
+    chartType:           "bar",
+    mainTextColor:       "#212126",
+    subTextColor:        "#636367",
+    xAxisLabel:          "Congressional District",
+    stackName:           "valid",
+    series1Name:         "Valid Sigs",
     series1BarColorMain: "#040449",
     series1BarColorSub:  "#535f8e",
-
     series2BarColorMain: "#a2bad2",
     series2BarColorSub:  "#dde5ef",
   }
@@ -21,6 +17,7 @@ window.buildChartOption = function (data, isMobile) {
       fontSize:    12,
       title:       "Valid Sigs by CD",
       subtitle:    "We need to qualify in 6 of 8 CDs",
+      xAxisRotate: 0,
       yAxisLabel:  "Sig Count",
       series2Name: "Valid Sigs Left",
     }
@@ -28,6 +25,7 @@ window.buildChartOption = function (data, isMobile) {
       fontSize:    18,
       title:       "Valid Signatures by Congressional District",
       subtitle:    "We need to qualify in 6 out of 8 congressional districts",
+      xAxisRotate: 45,
       yAxisLabel:  "Number of Signatures",
       series2Name: "Valid Sigs Remaining"
     };
@@ -91,7 +89,6 @@ window.buildChartOption = function (data, isMobile) {
         color: options.mainTextColor,
         fontSize: options.fontSize * 2
       }
-      
     },
 
     legend: {
@@ -112,7 +109,8 @@ window.buildChartOption = function (data, isMobile) {
     xAxis: {
       axisLabel: {
         fontSize: options.fontSize,
-        fontWeight: "bold"
+        fontWeight: "bold",
+        rotate: options.xAxisRotate
       },
       data: cds,
       name: options.xAxisLabel,
