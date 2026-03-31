@@ -1,4 +1,4 @@
-export function buildChartOption(data) {
+window.buildChartOption = function (data) {
   // Map your sheet columns → chart data
   const rmv = data.rmv;
   const division    = rmv.map(d => d["Division"]);
