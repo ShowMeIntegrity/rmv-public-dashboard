@@ -103,7 +103,8 @@ window.buildChartOption = function (data, isMobile) {
 
     grid: {
       top: "21%",
-      bottom: "19%"
+      bottom: "19%",
+      containLabel: true
     },
 
     xAxis: {
