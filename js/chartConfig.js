@@ -102,8 +102,10 @@ window.buildChartOption = function (data, isMobile) {
     },
 
     grid: {
-      top: "21%",
-      bottom: "19%",
+      top: "15%",
+      bottom: "10%",
+      left: "0%",
+      right: "0%",
       containLabel: true
     },
 
