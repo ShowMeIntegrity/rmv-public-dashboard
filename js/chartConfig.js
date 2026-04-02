@@ -102,10 +102,10 @@ window.buildChartOption = function (data, isMobile) {
     },
 
     grid: {
-      top: "15%",
-      bottom: "10%",
-      left: "0%",
-      right: "0%",
+      top: "20%",
+      bottom: "15%",
+      left: "5%",
+      right: "5%",
       containLabel: true
     },
 
@@ -132,6 +132,7 @@ window.buildChartOption = function (data, isMobile) {
         fontWeight: "bold"
       },
       name: options.yAxisLabel,
+      nameGap: 48,
       nameLocation: "center",
       nameTextStyle: {
         fontSize: options.fontSize * 4 / 3,
