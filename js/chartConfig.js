@@ -18,6 +18,7 @@ window.buildChartOption = function (data, isMobile) {
       title:        "Valid Sigs by CD",
       subtitle:     "We need to qualify in 6 of 8 CDs",
       gridTop:      "25%",
+      gridLeft:     "9%",
       xAxisRotate:  45,
       xAxisNameGap: 24,
       yAxisLabel:   "Sig Count",
@@ -29,6 +30,7 @@ window.buildChartOption = function (data, isMobile) {
       title:        "Valid Signatures by Congressional District",
       subtitle:     "We need to qualify in 6 out of 8 congressional districts",
       gridTop:      "20%",
+      gridLeft:     "7%",
       xAxisRotate:  0,
       xAxisNameGap: 24,
       yAxisLabel:   "Number of Signatures",
@@ -110,7 +112,7 @@ window.buildChartOption = function (data, isMobile) {
     grid: {
       top: options.gridTop,
       bottom: "15%",
-      left: "7%",
+      left: options.gridLeft,
       right: "5%",
       containLabel: true
     },
