@@ -9,6 +9,7 @@ window.buildChartOption = function (data, isMobile) {
     series1Name:         "Valid Sigs",
     series1BarColorMain: "#040449",
     series1BarColorSub:  "#535f8e",
+    series1BarColorDone: "#ffce0c",
     series2BarColorMain: "#a2bad2",
     series2BarColorSub:  "#dde5ef",
   }
@@ -45,19 +46,23 @@ window.buildChartOption = function (data, isMobile) {
   // Map sheet columns to chart data
   const rmv = data.rmv;
   const division    = rmv.map(d => d["Division"]);
-  // const checkedSigs = rmv.map(d => d["Checked Sigs"]);
   const t1Valid     = rmv.map(d => d["T1-Validated"]);
-  // const collectGoal = rmv.map(d => d["Collection Goal"]);
   const minValid    = rmv.map(d => d["Min Valid Needed"]);
 
   const cds         = division.slice(0,8);
-  // const realCollect = checkedSigs.slice(0,8);
-  const realValid   = t1Valid.slice(0,8);
-  // const goalCollect = collectGoal.slice(0,8);
+  let   realValid   = t1Valid.slice(0,8);
   const goalValid   = minValid.slice(0,8);
 
-  const diffValid   = subtractVector(goalValid, realValid);
-  // const diffCollect = subtractVector(goalCollect, realCollect);
+  let   diffValid   = subtractVector(goalValid, realValid);
+
+  // Check if confirmed valid sigs exceedes goal for each CD
+  diffValid.forEach ( (sigsLeft, idx) => {
+    if (sigsLeft <= 0) {
+      // Set number of valid sigs to goal and set difference to 0
+      realValid[idx] = goalValid[idx];
+      diffValid[idx] = 0;
+    }
+  });
 
 
   return {
@@ -160,6 +165,9 @@ window.buildChartOption = function (data, isMobile) {
       color: options.series1BarColorMain,
       itemStyle: {
         color: function (params) {
+          if (diffValid[params.dataIndex] <= 0) {
+            return options.series1BarColorDone;
+          }
           if (params.dataIndex === 5 | params.dataIndex === 7) {
             return options.series1BarColorSub;
           }
