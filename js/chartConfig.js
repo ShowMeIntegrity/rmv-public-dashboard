@@ -14,20 +14,28 @@ window.buildChartOption = function (data, isMobile) {
   }
   const dynamicOptions = isMobile
     ? {
-      fontSize:    12,
-      title:       "Valid Sigs by CD",
-      subtitle:    "We need to qualify in 6 of 8 CDs",
-      xAxisRotate: 45,
-      yAxisLabel:  "Sig Count",
-      series2Name: "Valid Sigs Left",
+      fontSize:     12,
+      title:        "Valid Sigs by CD",
+      subtitle:     "We need to qualify in 6 of 8 CDs",
+      gridTop:      "25%",
+      gridLeft:     "9%",
+      xAxisRotate:  45,
+      xAxisNameGap: 24,
+      yAxisLabel:   "Sig Count",
+      yAxisNameGap: 42,
+      series2Name:  "Valid Sigs Left",
     }
     : {
-      fontSize:    18,
-      title:       "Valid Signatures by Congressional District",
-      subtitle:    "We need to qualify in 6 out of 8 congressional districts",
-      xAxisRotate: 0,
-      yAxisLabel:  "Number of Signatures",
-      series2Name: "Valid Sigs Remaining"
+      fontSize:     18,
+      title:        "Valid Signatures by Congressional District",
+      subtitle:     "We need to qualify in 6 out of 8 congressional districts",
+      gridTop:      "20%",
+      gridLeft:     "7%",
+      xAxisRotate:  0,
+      xAxisNameGap: 24,
+      yAxisLabel:   "Number of Signatures",
+      yAxisNameGap: 72,
+      series2Name:  "Valid Sigs Remaining"
     };
 
   const options = { ...staticOptions, ...dynamicOptions };
@@ -102,8 +110,11 @@ window.buildChartOption = function (data, isMobile) {
     },
 
     grid: {
-      top: "21%",
-      bottom: "19%"
+      top: options.gridTop,
+      bottom: "15%",
+      left: options.gridLeft,
+      right: "5%",
+      containLabel: true
     },
 
     xAxis: {
@@ -114,6 +125,7 @@ window.buildChartOption = function (data, isMobile) {
       },
       data: cds,
       name: options.xAxisLabel,
+      nameGap: options.xAxisNameGap,
       nameLocation: "center",
       nameTextStyle: {
         fontSize: options.fontSize * 4 / 3,
@@ -129,6 +141,7 @@ window.buildChartOption = function (data, isMobile) {
         fontWeight: "bold"
       },
       name: options.yAxisLabel,
+      nameGap: options.yAxisNameGap,
       nameLocation: "center",
       nameTextStyle: {
         fontSize: options.fontSize * 4 / 3,

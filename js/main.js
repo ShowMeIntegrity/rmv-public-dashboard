@@ -39,7 +39,6 @@ async function render() {
 
     // Render Banner
     const isMobile = window.innerWidth < 800;
-    console.log(isMobile);
     if (banner) {
       banner.innerHTML = buildBanner(sheetData, isMobile);
     }

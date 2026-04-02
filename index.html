@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Signature Gathering Dashboard</title>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body margin="0" padding="0">
   <div id="banner"></div>
   <div class="chart-wrapper">
     <div id="chart-skeleton"></div>
@@ -26,6 +27,10 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js" defer></script>
-  <script type="module" src="js/main.js"></script>
+
+  <script src="js/bannerConfig.js"></script>
+  <script src="js/chartConfig.js"></script>
+  <script src="js/fetchData.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
