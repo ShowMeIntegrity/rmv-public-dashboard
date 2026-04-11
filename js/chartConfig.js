@@ -1,50 +1,8 @@
-window.buildChartOption = function (data, isMobile) {
-  // Set font sizes & text based on platform
-  const staticOptions = {
-    chartType:           "bar",
-    mainTextColor:       "#212126",
-    subTextColor:        "#636367",
-    xAxisLabel:          "Congressional District",
-    stackName:           "valid",
-    series1Name:         "Valid Sigs",
-    series1BarColorMain: "#040449",
-    series1BarColorSub:  "#535f8e",
-    series1BarColorDone: "#ffce0c",
-    series2BarColorMain: "#a2bad2",
-    series2BarColorSub:  "#dde5ef",
-  }
-  const dynamicOptions = isMobile
-    ? {
-      fontSize:     12,
-      title:        "Valid Sigs by CD",
-      subtitle:     "We need to qualify in 6 of 8 CDs",
-      gridTop:      "25%",
-      gridLeft:     "9%",
-      xAxisRotate:  45,
-      xAxisNameGap: 24,
-      yAxisLabel:   "Sig Count",
-      yAxisNameGap: 42,
-      series2Name:  "Valid Sigs Left",
-    }
-    : {
-      fontSize:     18,
-      title:        "Valid Signatures by Congressional District",
-      subtitle:     "We need to qualify in 6 out of 8 congressional districts",
-      gridTop:      "20%",
-      gridLeft:     "7%",
-      xAxisRotate:  0,
-      xAxisNameGap: 24,
-      yAxisLabel:   "Number of Signatures",
-      yAxisNameGap: 72,
-      series2Name:  "Valid Sigs Remaining"
-    };
-
-  const options = { ...staticOptions, ...dynamicOptions };
-  
-
-  
+window.buildChartOption = function (data, isMobile) {  
   // Map sheet columns to chart data
   const rmv = data.rmv;
+  const fw  = data.fw.data;
+
   const division    = rmv.map(d => d["Division"]);
   const t1Valid     = rmv.map(d => d["T1-Validated"]);
   const minValid    = rmv.map(d => d["Min Valid Needed"]);
@@ -63,6 +21,65 @@ window.buildChartOption = function (data, isMobile) {
       diffValid[idx] = 0;
     }
   });
+
+  // Get number of signatures reviewed
+  const raw  = rmv.map(d => d["Raw Sigs"]);
+  const paid = fw.map(d => d.signature_count);
+
+  const volNum     = raw.at(-2);
+  const paidNum    = paid.reduce((sum, val) => sum + val, 0);
+  const totalNum   = volNum + paidNum;
+
+  const reviewed      = rmv.map(d => d["Reviewed by eQual"]);
+  const reviewNum     = reviewed.at(-3);
+  const reviewPercent = reviewNum/totalNum * 100;
+
+
+  // Set font sizes & text based on platform
+  const staticOptions = {
+    chartType:           "bar",
+    mainTextColor:       "#212126",
+    subTextColor:        "#636367",
+    xAxisLabel:          "Congressional District",
+    stackName:           "valid",
+    series1Name:         "Valid Sigs",
+    series1BarColorMain: "#040449",
+    series1BarColorSub:  "#535f8e",
+    series1BarColorDone: "#ffce0c",
+    series2BarColorMain: "#a2bad2",
+    series2BarColorSub:  "#dde5ef",
+  }
+  const dynamicOptions = isMobile
+    ? {
+      fontSize:     12,
+      title:        "Valid Sigs by CD",
+      subtitle1:    "We need to qualify in 6 of 8 CDs",
+      subtitle2:    `${reviewNum.toLocaleString()} sigs reviewed (${reviewPercent.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%)`,
+      gridTop:      12 * 8,
+      gridLeft:     "10%",
+      xAxisRotate:  45,
+      xAxisNameGap: 24,
+      yAxisLabel:   "Sig Count",
+      yAxisNameGap: 42,
+      series2Name:  "Valid Sigs Left",
+      subtitle2Top : 12 * 4.5
+    }
+    : {
+      fontSize:     18,
+      title:        "Valid Signatures by Congressional District",
+      subtitle1:    "We need to qualify in 6 out of 8 congressional districts",
+      subtitle2:    `${reviewNum.toLocaleString()} signatures reviewed (${reviewPercent.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%)`,
+      gridTop:      18 * 8,
+      gridLeft:     "7%",
+      xAxisRotate:  0,
+      xAxisNameGap: 24,
+      yAxisLabel:   "Number of Signatures",
+      yAxisNameGap: 72,
+      series2Name:  "Valid Sigs Remaining",
+      subtitle2Top : 18 * 5
+    };
+
+  const options = { ...staticOptions, ...dynamicOptions };
 
 
   return {
@@ -91,18 +108,34 @@ window.buildChartOption = function (data, isMobile) {
       }
     },
 
-    title: {
-      subtext: options.subtitle,
-      subtextStyle: {
-        color: options.subTextColor,
-        fontSize: options.fontSize * 4 / 3
+    title: [
+      {
+        text: options.title,
+        textStyle: {
+          color: options.mainTextColor,
+          fontSize: options.fontSize * 2
+        },
+        top: 0
       },
-      text: options.title,
-      textStyle: {
-        color: options.mainTextColor,
-        fontSize: options.fontSize * 2
+      {
+        text: options.subtitle1,
+        textStyle: {
+          color: options.subTextColor,
+          fontSize: options.fontSize * 4 / 3,
+          fontWeight: "normal"
+        },
+        top: options.fontSize * 2.5
+      },
+      {
+        text: options.subtitle2,
+        textStyle: {
+          color: options.series1BarColorMain,
+          fontSize: options.fontSize * 5 / 3,
+          fontWeight: 600
+        },
+        top: options.subtitle2Top
       }
-    },
+    ],
 
     legend: {
       bottom: "2%",

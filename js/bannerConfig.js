@@ -11,7 +11,7 @@ window.buildBanner = function (data, isMobile) {
   const paid = fw.map(d => d.signature_count);
 
   const allGoalNum = 300000;
-  const volGoalNum = 220000;
+  const volGoalNum = 230000;
   const volNum     = raw.at(-2);
   const paidNum    = paid.reduce((sum, val) => sum + val, 0);
   const totalNum   = volNum + paidNum;
