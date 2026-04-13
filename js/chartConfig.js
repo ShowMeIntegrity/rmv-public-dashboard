@@ -36,47 +36,53 @@ window.buildChartOption = function (data, isMobile) {
 
 
   // Set font sizes & text based on platform
+  const defaultFontSize = isMobile ? 12 : 18;
+
   const staticOptions = {
     chartType:           "bar",
+    fontSize:            defaultFontSize,
     mainTextColor:       "#212126",
-    subTextColor:        "#636367",
-    xAxisLabel:          "Congressional District",
-    stackName:           "valid",
     series1Name:         "Valid Sigs",
     series1BarColorMain: "#040449",
     series1BarColorSub:  "#535f8e",
     series1BarColorDone: "#ffce0c",
     series2BarColorMain: "#a2bad2",
     series2BarColorSub:  "#dde5ef",
+    stackName:           "valid",
+    subTextColor:        "#636367",
+    subtitle1Top:        defaultFontSize * 2.25,
+    xAxisLabel:          "Congressional District",
+    xAxisNameGap:        24
   }
+
   const dynamicOptions = isMobile
     ? {
-      fontSize:     12,
       title:        "Valid Sigs by CD",
       subtitle1:    "We need to qualify in 6 of 8 CDs",
-      subtitle2:    `${reviewNum.toLocaleString()} sigs reviewed (${reviewPercent.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%)`,
-      gridTop:      12 * 8,
-      gridLeft:     "10%",
-      xAxisRotate:  45,
-      xAxisNameGap: 24,
-      yAxisLabel:   "Sig Count",
-      yAxisNameGap: 42,
+      subtitle2:    `${reviewNum.toLocaleString()} sigs checked for validity`,
+      subtitle3:    `(${reviewPercent.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}% of collected sigs)`,
       series2Name:  "Valid Sigs Left",
-      subtitle2Top : 12 * 4.5
+      yAxisLabel:   "Sig Count",
+      xAxisRotate:  45,
+      yAxisNameGap: 42,
+      subtitle2Top: defaultFontSize * 4,
+      subtitle3Top: defaultFontSize * 6,
+      gridTop:      defaultFontSize * 8.25,
+      gridLeft:     "10%"
     }
     : {
-      fontSize:     18,
       title:        "Valid Signatures by Congressional District",
       subtitle1:    "We need to qualify in 6 out of 8 congressional districts",
-      subtitle2:    `${reviewNum.toLocaleString()} signatures reviewed (${reviewPercent.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%)`,
-      gridTop:      18 * 8,
-      gridLeft:     "7%",
-      xAxisRotate:  0,
-      xAxisNameGap: 24,
-      yAxisLabel:   "Number of Signatures",
-      yAxisNameGap: 72,
+      subtitle2:    `${reviewNum.toLocaleString()} signatures checked for validity`,
+      subtitle3:    `(${reviewPercent.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}% of collected signatures)`,
       series2Name:  "Valid Sigs Remaining",
-      subtitle2Top : 18 * 5
+      yAxisLabel:   "Number of Signatures",
+      xAxisRotate:  0,
+      yAxisNameGap: 72,
+      subtitle2Top: defaultFontSize * 4.25,
+      subtitle3Top: defaultFontSize * 6.25,
+      gridTop:      defaultFontSize * 8,
+      gridLeft:     "7%"
     };
 
   const options = { ...staticOptions, ...dynamicOptions };
@@ -124,7 +130,7 @@ window.buildChartOption = function (data, isMobile) {
           fontSize: options.fontSize * 4 / 3,
           fontWeight: "normal"
         },
-        top: options.fontSize * 2.5
+        top: options.subtitle1Top
       },
       {
         text: options.subtitle2,
@@ -134,6 +140,15 @@ window.buildChartOption = function (data, isMobile) {
           fontWeight: 600
         },
         top: options.subtitle2Top
+      },
+      {
+        text: options.subtitle3,
+        textStyle: {
+          color: options.subTextColor,
+          fontSize: options.fontSize * 4 / 3,
+          fontWeight: "normal"
+        },
+        top: options.subtitle3Top
       }
     ],
 
