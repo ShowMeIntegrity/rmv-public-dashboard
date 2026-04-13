@@ -30,9 +30,9 @@ window.buildChartOption = function (data, isMobile) {
   const paidNum    = paid.reduce((sum, val) => sum + val, 0);
   const totalNum   = volNum + paidNum;
 
-  const reviewed      = rmv.map(d => d["Reviewed by eQual"]);
-  const reviewNum     = reviewed.at(-3);
-  const reviewPercent = reviewNum/totalNum * 100;
+  const reviewed  = rmv.map(d => d["Reviewed by eQual"]);
+  const reviewNum = reviewed.at(-3);
+  const remainNum = totalNum - reviewNum;
 
 
   // Set font sizes & text based on platform
@@ -60,28 +60,28 @@ window.buildChartOption = function (data, isMobile) {
       title:        "Valid Sigs by CD",
       subtitle1:    "We need to qualify in 6 of 8 CDs",
       subtitle2:    `${reviewNum.toLocaleString()} sigs checked for validity`,
-      subtitle3:    `(${reviewPercent.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}% of collected sigs)`,
+      subtitle3:    `(${remainNum.toLocaleString()} collected sigs not checked)`,
       series2Name:  "Valid Sigs Left",
       yAxisLabel:   "Sig Count",
       xAxisRotate:  45,
       yAxisNameGap: 42,
       subtitle2Top: defaultFontSize * 4,
       subtitle3Top: defaultFontSize * 6,
-      gridTop:      defaultFontSize * 8.25,
+      gridTop:      defaultFontSize * 8.75,
       gridLeft:     "10%"
     }
     : {
       title:        "Valid Signatures by Congressional District",
       subtitle1:    "We need to qualify in 6 out of 8 congressional districts",
       subtitle2:    `${reviewNum.toLocaleString()} signatures checked for validity`,
-      subtitle3:    `(${reviewPercent.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}% of collected signatures)`,
+      subtitle3:    `(${remainNum.toLocaleString()} collected signatures not checked)`,
       series2Name:  "Valid Sigs Remaining",
       yAxisLabel:   "Number of Signatures",
       xAxisRotate:  0,
       yAxisNameGap: 72,
       subtitle2Top: defaultFontSize * 4.25,
       subtitle3Top: defaultFontSize * 6.25,
-      gridTop:      defaultFontSize * 8,
+      gridTop:      defaultFontSize * 8.5,
       gridLeft:     "7%"
     };
 
